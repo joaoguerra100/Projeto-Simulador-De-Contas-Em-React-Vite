@@ -1,0 +1,11 @@
+.container {
+    width: 100%;
+    background-color: #191919;
+    color: #FFF;
+    padding: 7rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem; /* Espaçamento entre os cards */
+  }
+  
