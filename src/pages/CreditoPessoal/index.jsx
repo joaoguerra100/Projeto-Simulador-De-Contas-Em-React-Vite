@@ -1,7 +1,8 @@
 import styles from './CreditoPessoal.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import HistoricoConsultas from '../../components/HistoricoConsultas'
 
 function CreditoPessoal() {
     const [inputs, setInputs] = useState({
@@ -12,6 +13,28 @@ function CreditoPessoal() {
 
     const [resultado, setResultado] = useState(null)
     const [erro, setErro] = useState('')
+
+    const tituloPagina = "Crédito Pessoal";
+    const chaveLocalStorage = 'historico_credito_pessoal';
+    const [historico, setHistorico] = useState([]);
+
+    useEffect(() => {
+        const historicoSalvo = localStorage.getItem(chaveLocalStorage);
+        if (historicoSalvo) {
+            setHistorico(JSON.parse(historicoSalvo));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (historico.length > 0) { // Evita salvar o estado inicial vazio
+             localStorage.setItem(chaveLocalStorage, JSON.stringify(historico));
+        }
+    }, [historico]);
+
+    const limparHistoricoLocal = () => {
+        setHistorico([]);
+        localStorage.removeItem(chaveLocalStorage);
+    };
 
     const handleChange = (e) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value })
@@ -25,18 +48,17 @@ function CreditoPessoal() {
         const parcelasNum = parseInt(parcelas)
         const taxaNum = parseFloat(taxa) / 100
 
-        if (isNaN(valorNum)) {
-            setErro('⚠️ Preencha o campo de Valor.')
+        // ... (sua lógica de validação continua a mesma)
+        if (isNaN(valorNum) || valorNum <= 0) {
+            setErro('⚠️ O campo Valor deve ser um número positivo.')
             return
         }
-
-        if (isNaN(parcelasNum)) {
-            setErro('⚠️ Preencha o campo de Parcelas.')
+        if (isNaN(parcelasNum) || parcelasNum <= 0) {
+            setErro('⚠️ O campo Parcelas deve ser um número inteiro positivo.')
             return
         }
-
-        if (isNaN(taxaNum)) {
-            setErro('⚠️ Preencha o campo de Taxa.')
+        if (isNaN(taxaNum) || taxaNum < 0) {
+            setErro('⚠️ O campo Taxa deve ser um número positivo.')
             return
         }
 
@@ -45,62 +67,77 @@ function CreditoPessoal() {
         const jurosTotal = totalPago - valorNum
         const porcentagemJuros = (jurosTotal / valorNum) * 100
 
-        setResultado({
+        const novoResultado = {
             parcelaMensal: parcelaMensal.toFixed(2),
             totalPago: totalPago.toFixed(2),
             porcentagemJuros: porcentagemJuros.toFixed(2)
-        })
+        }
+
+        setResultado(novoResultado);
+
+        // Prepara os dados para o componente de histórico genérico
+        const dadosParaExibir = [
+            { rotulo: 'Valor financiado', valor: `R$ ${valor}` },
+            { rotulo: 'Número de parcelas', valor: parcelas },
+            { rotulo: 'Taxa de juros', valor: `${taxa}%` },
+            { rotulo: 'Resultado (Parcela Mensal)', valor: `R$ ${novoResultado.parcelaMensal}` }
+        ];
+
+        const novaConsulta = {
+            id: Date.now(),
+            timestamp: Date.now(),
+            dadosParaExibir: dadosParaExibir // Passa o array formatado
+        };
+
+        setHistorico([novaConsulta, ...historico]);
     }
 
     return (
         <div className={styles.layout}>
             <Header />
             <div className={styles.container}>
-                <h2>Crédito Pessoal</h2>
+                <h2>{tituloPagina}</h2>
 
+                {/* Input do valor a ser financiado */}
                 <div className={styles.form}>
                     <div className={styles.inputGroup}>
                         <label htmlFor="valor">Valor a ser financiado</label>
-                        <input
-                            type="number"
-                            name="valor"
-                            placeholder="EX: 1000"
-                            required
-                            value={inputs.valor}
+                        <input 
+                            type="number" 
+                            name="valor" 
+                            placeholder="EX: 1000" 
+                            required value={inputs.valor} 
                             onChange={handleChange}
                         />
                     </div>
 
+                    {/* Input do Número de parcelas */}
                     <div className={styles.inputGroup}>
                         <label htmlFor="parcelas">Número de parcelas</label>
-                        <input
-                            type="number"
-                            name="parcelas"
-                            placeholder="EX: 12"
-                            required
-                            value={inputs.parcelas}
+                        <input 
+                            type="number" 
+                            name="parcelas" 
+                            placeholder="EX: 12" 
+                            required value={inputs.parcelas} 
                             onChange={handleChange}
                         />
                     </div>
 
+                    {/* Input do Número de parcelas */}
                     <div className={styles.inputGroup}>
                         <label htmlFor="taxa">Taxa de juros (%)</label>
-                        <input
-                            type="number"
-                            name="taxa"
-                            placeholder="EX: 1.5"
-                            required
-                            value={inputs.taxa}
+                        <input 
+                            type="number" 
+                            name="taxa" 
+                            placeholder="EX: 1.5" 
+                            required value={inputs.taxa} 
                             onChange={handleChange}
                         />
                     </div>
 
-                    <button className={styles.consultarBtn} onClick={handleConsulta}>
-                        Simular
-                    </button>
-
+                    {/* Resultado dos valores */}
+                    <button className={styles.consultarBtn} onClick={handleConsulta}>Simular</button>
                     {erro && <div className={styles.erro}>{erro}</div>}
-
                     {resultado && (
                         <div className={styles.resultadoCard}>
                             <h3>Resultado da Simulação de Crédito</h3>
@@ -110,6 +147,13 @@ function CreditoPessoal() {
                         </div>
                     )}
                 </div>
+                
+                {/* Historico de pesquisa */}
+                <HistoricoConsultas
+                    titulo={tituloPagina}
+                    historico={historico}
+                    limparHistorico={limparHistoricoLocal}
+                />
             </div>
             <Footer />
         </div>

@@ -1,0 +1,71 @@
+.historicoContainer {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 600px; 
+    box-sizing: border-box;
+}
+
+.historicoContainer h3 {
+    margin-top: 0;
+    color: #0073b1;
+}
+
+.limparBtn {
+    background-color: #e40000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.limparBtn:hover {
+    background-color: #c00000;
+}
+
+.lista {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.itemHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.itemHeader span {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.itemBody p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.itemBody hr {
+    border: 0;
+    border-top: 1px solid #f0f0f0;
+    margin: 10px 0;
+}
