@@ -1,19 +1,29 @@
-.card {
+.cardLight {
+  background-color: #f9f9f9;
+  color: #000;
+  border: 1px solid #ddd;
+}
+
+.cardDark {
   background-color: #262626;
+  color: #f0f0f0;
   border: 1px solid #444;
+}
+
+.card {
   border-radius: 12px;
   padding: 2rem;
   width: 400px;
   max-width: 400px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .icon {

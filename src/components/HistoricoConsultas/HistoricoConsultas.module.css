@@ -39,6 +39,7 @@
 
 .item {
     background-color: #fff;
+    color: #000;
     border: 1px solid #eee;
     border-radius: 5px;
     padding: 15px;
@@ -56,16 +57,33 @@
 
 .itemHeader span {
     font-size: 0.85rem;
-    color: #666;
+    color: inherit;
 }
 
 .itemBody p {
     margin: 5px 0;
-    color: #333;
+    color: inherit;
 }
 
 .itemBody hr {
     border: 0;
     border-top: 1px solid #f0f0f0;
     margin: 10px 0;
+}
+
+/* Modo escuro */
+
+.historicoLight {
+    background-color: #f9f9f9;
+    color: #000;
+}
+
+.historicoDark {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+.itemDark {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
 }

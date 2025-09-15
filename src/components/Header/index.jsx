@@ -11,13 +11,13 @@ function Header() {
 
     return (
         <header className={styles.header}>
-            <Link className={styles.banner}></Link>
+            <Link to="/" className={styles.banner}></Link>
             <nav
                 className={`${styles.menuSandwich} ${showMenu ? styles.show : ''}`}
                 onClick={toggleMenu}
             >
                 <Link to="/">Home</Link>
-                <Link to="/">Configuraçoes</Link>
+                <Link to="/configuracoes">Configuraçoes</Link>
                 <Link to="/">Pesquisa</Link>
             </nav>
             <div

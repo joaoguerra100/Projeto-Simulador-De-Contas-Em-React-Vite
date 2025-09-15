@@ -1,6 +1,9 @@
 import styles from './HistoricoConsultas.module.css';
+import { useContext } from 'react';
+import { ThemeContext } from '../ThemeContext';
 
 function HistoricoConsultas({ titulo, historico, limparHistorico }) {
+    const { theme } = useContext(ThemeContext);
 
     const formatarData = (timestamp) => {
         const data = new Date(timestamp);
@@ -13,7 +16,7 @@ function HistoricoConsultas({ titulo, historico, limparHistorico }) {
     };
 
     return (
-        <div className={styles.historicoContainer}>
+        <div className={`${styles.historicoContainer} ${theme === 'dark' ? styles.historicoDark : styles.historicoLight}`}>
             <h3>Histórico de Simulações: {titulo}</h3>
             {historico.length > 0 ? (
                 <>
@@ -22,13 +25,12 @@ function HistoricoConsultas({ titulo, historico, limparHistorico }) {
                     </button>
                     <ul className={styles.lista}>
                         {historico.map((item) => (
-                            <li key={item.id} className={styles.item}>
+                            <li key={item.id} className={`${styles.item} ${theme === 'dark' ? styles.itemDark : ''}`}>
                                 <div className={styles.itemHeader}>
                                     <strong>Consulta de {titulo}</strong>
                                     <span>{formatarData(item.timestamp)}</span>
                                 </div>
                                 <div className={styles.itemBody}>
-                                    {/* Mapeia dinamicamente os campos de dados */}
                                     {item.dadosParaExibir.map((dado, index) => (
                                         <p key={index}>
                                             <strong>{dado.rotulo}:</strong> {dado.valor}

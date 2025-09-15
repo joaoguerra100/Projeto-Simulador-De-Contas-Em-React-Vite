@@ -1,0 +1,32 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #0073b1;
+}
+
+.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
