@@ -1,0 +1,28 @@
+.loginPageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    background-color: #f0f2f5; 
+}
+
+/* Tema escuro */
+
+.formLight {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    color: #000;
+}
+
+.formDark {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
