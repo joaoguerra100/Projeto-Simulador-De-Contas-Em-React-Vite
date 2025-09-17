@@ -25,7 +25,6 @@ function Header() {
             >
                 <Link to="/">Home</Link>
                 <Link to="/configuracoes">Configuraçoes</Link>
-                <Link to="/">Pesquisa</Link>
                 <Link to="/login" onClick={handleLogout}>Logout</Link>
             </nav>
             <div

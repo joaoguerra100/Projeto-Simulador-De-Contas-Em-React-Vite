@@ -4,7 +4,8 @@ import CreditoPessoal from "./pages/CreditoPessoal"
 import FinanciamentoImobiliario from "./pages/FinanciamentoImobiliario"
 import Investimento from "./pages/Investimento"
 import Configurations from "./pages/Configurations"
-import LoginPage from "./pages/Login"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 import PrivateRoute from "./components/PrivateRoute"
 
 function AppRoutes() {
@@ -12,7 +13,8 @@ function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 {/* ROTA PÚBLICA: Todos podem acessar */}
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registro" element={<Register />} />
 
                 {/* ROTAS PRIVADAS: Somente usuários logados podem acessar */}
                 <Route element={<PrivateRoute />}>

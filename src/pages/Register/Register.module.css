@@ -1,4 +1,4 @@
-.loginPageContainer {
+.registerPageContainer {
     display: flex;
     flex-direction: column;
     min-height: 100vh; 
@@ -26,5 +26,4 @@
     background-color: #1e1e1e;
     color: #f0f0f0;
 }
-
 

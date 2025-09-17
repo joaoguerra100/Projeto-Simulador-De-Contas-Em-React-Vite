@@ -22,3 +22,21 @@ const FAKE_USER = {
       }, 1000)
     })
   }
+
+  export const register = (email, password, name) => {
+    return new Promise((resolve, reject) => {
+      //Simula o tempo de rsposa da API
+      setTimeout(() => {
+        //1: Verificaria na back-end real se o email ja existe
+        //2: salvaria o novo usuario no banco de dados
+        // como nao possui back-end e simulado que sempre da certos os passos
+        if(email && password && name) {
+          resolve({
+            message: 'Usuario registrado com uscesso! Voce ja pode fazer o login',
+          })
+        } else {
+          reject(new Error ('Dados invalidos para registro'))
+        }
+      }, 1000)
+    })
+  }

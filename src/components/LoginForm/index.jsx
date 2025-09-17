@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import styles from './LoginForm.module.css'
 import { ThemeContext } from '../../components/ThemeContext';
+import { Link } from 'react-router-dom';
 
 function LoginForm({ onLogin }) {
     const { theme } = useContext(ThemeContext);
@@ -39,6 +40,10 @@ function LoginForm({ onLogin }) {
                     />
                 </div>
                 <button type='submit'>Entrar</button>
+
+                <p className={styles.registerLink}>
+                    Não tem uma conta? <Link to="/registro">Cadastre-se</Link>
+                </p>
 
             </form>
         </div>
